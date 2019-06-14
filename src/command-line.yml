@@ -1,0 +1,51 @@
+--- # YAML file for command-line argument processing (see: clap-rs)
+name: findme
+version: "0.2"
+about: find files and folders
+args:
+ - count:
+    short: 'n'
+    long: 'count'
+    default_value: '10'
+    help: 'The number of items to find'
+ - files:
+    long: 'files'
+    short: 'f'
+    help: 'Find files'
+ - dirs:
+    long: 'dirs'
+    short: 'd'
+    help: 'Find folders'
+ - op:
+    index: 1
+    required: true
+    help: |
+     Try one of:
+      * newest-<modified|created|accessed>
+      * oldest-<modified|created|accessed>
+      * smallest
+      * largest
+ - paths:
+    index: 2
+    required: true
+    multiple: true
+    help: 'One or more directories to search'
+ - recursive:
+    short: 'r'
+    long: 'recursive'
+    help: 'Traverses the directory tree recursively. Can also set a maximum recursion level with the --max-subdirs option'
+ - symlinks:
+    long: 'follow-symlinks'
+ - max-subdirs:
+    short: 'm'
+    long: 'max-subdirs'
+    help: 'Maximum number of subdiretories to recurse, relative to starting directory. This cannot be disabled, and has a maximum value of 65535'
+    default_value: '1024'
+ - ignore-errors:
+    short: 'i'
+    long: 'ignore-errors'
+    help: 'By default, errors are printed to the screen. This ignores errors completely'
+groups:
+ - subjects: 
+    args: ['files', 'dirs']
+    required: true
